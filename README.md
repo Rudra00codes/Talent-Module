@@ -5,7 +5,7 @@
   
   [![Made for JPD Hub](https://img.shields.io/badge/Made%20for-JPD%20Hub-blue)](https://jpdhub.com)
   [![Hackathon](https://img.shields.io/badge/Hackathon-Advitiya%202025-orange)](https://advitiya.iitrpr.ac.in)
-  [![Team Size](https://img.shields.io/badge/Team%20Size-4-green)]()
+  [![Team Size](https://img.shields.io/badge/Team%20Size-5-green)]()
   [![Status](https://img.shields.io/badge/Status-Live-success)]()
 </div>
 
@@ -16,10 +16,11 @@ This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
 ### Team Details
 | Name | Role | GitHub |
 |------|------|--------|
-| [Team Member 1] | Full Stack Developer | [@github](https://github.com) |
-| [Team Member 2] | Frontend Developer | [@github](https://github.com) |
-| [Team Member 3] | Backend Developer | [@github](https://github.com) |
-| [Team Member 4] | UI/UX Designer | [@github](https://github.com) |
+| Yugandhar Bhardwaj | Project Manager | [@github](https://github.com) |
+| Rudra Pratap Singh | Frontend-Backend Integrator | [@Rudra00codes](https://github.com/Rudra00codes) |
+| Anant Srivastava | Feature Developer | [@RoboShep](https://github.com)
+| Prince Sharma |  Researcher  | [@github](https://github.com) |
+| Aditya Punj | UI/UX Designer | [@github](https://github.com) |
 
 ## 💡 Problem Statement
 JPD Hub needs a Talent Module that connects talented individuals with clients while maintaining admin control. The platform should:
@@ -62,7 +63,9 @@ JPD Hub needs a Talent Module that connects talented individuals with clients wh
 
 ## 📊 Architecture
 
-The architecture of the Talent Platform consists of a React frontend that communicates with a Node.js backend. The backend handles various services such as CRUD operations, file storage, SMS and email services, authentication, logging, monitoring, and containerization. Below is a visual representation of the architecture:
+#### The architecture of the Talent Platform consists of a React frontend that communicates with a Node.js backend.
+
+#### The backend handles various services such as CRUD operations, file storage, SMS and email services, authentication, logging, monitoring, and containerization. Below is a visual representation of the architecture:
 
 ```mermaid
 graph TD
@@ -80,53 +83,107 @@ graph TD
 
 ## 🛠️ Technology Stack
 
-<div class="tech-grid">
+<div class="tech-grid" style="display: flex; gap: 20px;">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" alt="React"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="40" alt="TypeScript"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" alt="Node.js"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="40" alt="MongoDB"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="40" alt="Docker"/>
 </div>
+
+<br>
 
 - **Frontend**: React.js with TypeScript
 - **State Management**: React Context API
 - **Styling**: Styled-components
 - **Testing**: Jest and React Testing Library
-- **Build Tool**: Create React App
+- **Build Tool**: Vite
 - **Package Manager**: npm
 
-## 📁 Project Structure
+## 📂 Project Structure
+
+<details>
+  <summary>Click to expand!</summary>
 
 ```bash
-talent-platform-frontend/
-├── src/
-│   ├── components/
-│   │   ├── common/           # Shared components
-│   │   │   ├── Button/
-│   │   │   ├── Input/
-│   │   │   └── Modal/
-│   │   ├── talent/          # Talent-specific components
-│   │   │   ├── TalentSearch.tsx
-│   │   │   ├── TalentCard.tsx
-│   │   │   └── TalentList.tsx
-│   │   ├── client/          # Client-specific components
-│   │   └── admin/           # Admin-specific components
-│   ├── pages/
-│   │   ├── talent/
-│   │   ├── client/
-│   │   └── admin/
+talent-platform/
+├── backend/
+│   ├── config/
+│   │   ├── database.js
+│   │   └── whatsapp.js
+│   ├── controllers/
+│   │   ├── adminController.js
+│   │   ├── clientController.js
+│   │   └── talentController.js
+│   ├── middleware/
+│   │   ├── adminAuth.js
+│   │   └── auth.js
+│   ├── models/
+│   │   ├── Client.js (deleted)
+│   │   ├── Client.ts
+│   │   ├── HireRequest.js
+│   │   ├── Talent.js
+│   │   ├── Talent.ts
+│   │   └── User.js
+│   ├── routes/
+│   │   ├── adminRoutes.js
+│   │   ├── clientRoutes.js
+│   │   └── talentRoutes.js
 │   ├── services/
-│   ├── types/
-│   ├── utils/
-│   ├── hooks/
-│   ├── context/
-│   ├── assets/
-│   ├── styles/
-│   ├── App.tsx
-│   └── main.tsx
-├── public/
-├── package.json
-└── tsconfig.json
+│   │   ├── emailService.js
+│   │   ├── fileUploadService.js
+│   │   └── notificationService.ts
+│   └── .env
+├── talent-platform-frontend/
+│   ├── public/
+│   │   ├── banner.png
+│   │   ├── index.html (deleted)
+│   │   ├── manifest.json
+│   │   ├── robots.txt
+│   │   └── screenshots/
+│   │       ├── dashboard.png
+│   │       └── profile.png
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.tsx
+│   │   │   ├── ProtectedRoute.tsx
+│   │   │   ├── talent/
+│   │   │   │   ├── TalentCard.tsx
+│   │   │   │   ├── TalentList.tsx
+│   │   │   │   └── TalentSearch.tsx
+│   │   ├── pages/
+│   │   │   ├── admin/
+│   │   │   │   ├── Dashboard.tsx
+│   │   │   │   ├── TalentApproval.js
+│   │   │   ├── client/
+│   │   │   │   ├── Dashboard.tsx
+│   │   │   │   ├── Registration.tsx
+│   │   │   ├── talent/
+│   │   │   │   ├── Directory.tsx
+│   │   │   │   ├── Profile.tsx
+│   │   │   │   └── Registration.tsx
+│   │   ├── styles/
+│   │   │   ├── AdminDashboard.css
+│   │   │   ├── TalentRegistration.css
+│   │   ├── App.css
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── index.jsx
+│   │   ├── main.jsx
+│   │   ├── reportWebVitals.js
+│   │   ├── setupTests.js
+│   ├── .gitignore
+│   ├── eslint.config.js
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   ├── tsconfig.app.json
+│   ├── tsconfig.json
+│   ├── tsconfig.node.json
+│   └── vite.config.ts
+└── README.md
 ```
+</details>
 
 ## 🚦 Getting Started
 
