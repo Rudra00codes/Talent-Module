@@ -1,7 +1,7 @@
 # 🎯 Talent Platform - JPD Hub Hackathon 2025
 
 <div align="center">
-  <img src="public/banner.png" alt="Talent Platform Banner" width="100%">
+  <img src="/talent-platform/talent-platform-frontend/public/talentModule-baner.png" alt="Talent Platform Banner" width="100%">
   
   [![Made for JPD Hub](https://img.shields.io/badge/Made%20for-JPD%20Hub-blue)](https://jpdhub.com)
   [![Hackathon](https://img.shields.io/badge/Hackathon-Advitiya%202025-orange)](https://advitiya.iitrpr.ac.in)
@@ -12,16 +12,13 @@
 
 ## 🏆 Hackathon Submission
 
-#### This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
+<div style="display: flex; align-items: center; gap: 20px;">
+  <div>
+    This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
+  </div>
+  <img src="/talent-platform/talent-platform-frontend/public/JPD_Card.png" alt="JPD Hub Card" width="300px" style="border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+</div>
 
-### Team Details
-| Name | Role | GitHub |
-|------|------|--------|
-| Yugandhar Bhardwaj | Project Lead | [@github](https://github.com) |
-| Rudra Pratap Singh | Frontend-Backend Integrator | [@Rudra00codes](https://github.com/Rudra00codes) |
-| Anant Srivastava | Backend and Feature Developer | [@RoboShep](https://github.com)
-| Prince Sharma |  Researcher  | [@github](https://github.com) |
-| Aditya Punj | UI/UX Designer | [@github](https://github.com) |
 
 ## 💡 Problem Statement
 JPD Hub needs a Talent Module that connects talented individuals with clients while maintaining admin control. The platform should:
@@ -228,41 +225,6 @@ talent-platform/
     ```
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
-## 🛠️ Built With
-
-- [React](https://reactjs.org/) - A JavaScript library for building user interfaces.
-- [TypeScript](https://www.typescriptlang.org/) - A statically typed superset of JavaScript.
-- [Vite](https://vitejs.dev/) - A fast build tool for modern web projects.
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework.
-- [React Router](https://reactrouter.com/) - A collection of navigational components that compose declaratively with your application.
-- [Axios](https://axios-http.com/) - A promise-based HTTP client for the browser and Node.js.
-- [Redux](https://redux.js.org/) - A predictable state container for JavaScript apps.
-- [Redux Toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development.
-- [React Query](https://react-query.tanstack.com/) - A powerful data-fetching library for React.
-- [React Hook Form](https://react-hook-form.com/) - A library for managing forms in React.
-
-- [ESLint](https://eslint.org/) - A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
-- [Conventional Commits](https://www.conventionalcommits.org/) - A specification for adding human and machine-readable meaning to commit messages.
-
-
-
-## 📝 Development Approach
-
-This project follows these key principles:
-
-- **Component-Based Architecture**: Modular and reusable components
-- **Type Safety**: Strict TypeScript implementation
-- **Clean Code**: Following SOLID principles and clean code practices
-- **Responsive Design**: Mobile-first approach
-- **Accessibility**: Following WCAG guidelines
-
-## 🔑 Key Design Decisions
-
-- **TypeScript**: Chosen for type safety and better developer experience
-- **Styled-components**: For component-scoped styling and dynamic theming
-- **Context API**: For state management, avoiding Redux complexity for our use case
-- **Custom Hooks**: For reusable logic and cleaner components
-
 
 ## 📱 Features & Screenshots
 
@@ -290,22 +252,18 @@ This project follows these key principles:
 - [ ] Mobile application
 - [ ] Advanced analytics dashboard
 
-## 📚 Documentation
+<hr>
 
-Additional documentation can be found in the `/docs` directory:
+## Team Details
+| Name | Role | GitHub |
+|------|------|--------|
+| Yugandhar Bhardwaj | Project Lead | [@github](https://github.com) |
+| Rudra Pratap Singh | Frontend-Backend Integrator | [@Rudra00codes](https://github.com/Rudra00codes) |
+| Anant Srivastava | Backend and Feature Developer | [@RoboShep](https://github.com)
+| Prince Sharma |  Researcher  | [@github](https://github.com) |
+| Aditya Punj | UI/UX Designer | [@github](https://github.com) |
 
-- API Documentation
-- Component Documentation
-- Contributing Guidelines
 
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 🙏 Acknowledgments
 - JPD Hub for the opportunity
