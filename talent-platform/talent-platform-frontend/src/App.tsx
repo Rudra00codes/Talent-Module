@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TalentRegistration from './pages/talent/Registration';
@@ -9,42 +8,47 @@ import TalentApproval from './pages/admin/TalentApproval';
 import ClientRegistration from './pages/client/Registration';
 import ClientDashboard from './pages/client/Dashboard';
 import ProtectedRoute from './components/ProtectedRoute';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<TalentDirectory />} />
-        <Route path="/talent/register" element={<TalentRegistration />} />
-        <Route path="/client/register" element={<ClientRegistration />} />
-        <Route path="/talent/:id" element={<TalentProfile />} />
-        
-        {/* Protected Admin Routes */}
-        <Route 
-          path="/admin/*" 
-          element={
-            <ProtectedRoute role="admin">
-              <Routes>
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="talents" element={<TalentApproval />} />
-              </Routes>
-            </ProtectedRoute>
-          } 
-        />
+    <>
+      <Router>
+        <Navbar />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<TalentDirectory />} />
+          <Route path="/talent/register" element={<TalentRegistration />} />
+          <Route path="/client/register" element={<ClientRegistration />} />
+          <Route path="/talent/:id" element={<TalentProfile />} />
+          
+          {/* Protected Admin Routes */}
+          <Route 
+            path="/admin/*" 
+            element={
+              <ProtectedRoute role="admin">
+                <Routes>
+                  <Route path="dashboard" element={<AdminDashboard />} />
+                  <Route path="talents" element={<TalentApproval />} />
+                </Routes>
+              </ProtectedRoute>
+            } 
+          />
 
-        {/* Protected Client Routes */}
-        <Route 
-          path="/client/dashboard" 
-          element={
-            <ProtectedRoute role="client">
-              <ClientDashboard />
-            </ProtectedRoute>
-          } 
-        />
-      </Routes>
-    </Router>
+          {/* Protected Client Routes */}
+          <Route 
+            path="/client/dashboard" 
+            element={
+              <ProtectedRoute role="client">
+                <ClientDashboard />
+              </ProtectedRoute>
+            } 
+          />
+        </Routes>
+      </Router>
+      <ToastContainer position="top-right" />
+    </>
   );
 }
 

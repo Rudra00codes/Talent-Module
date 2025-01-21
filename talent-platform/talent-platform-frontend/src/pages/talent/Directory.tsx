@@ -3,7 +3,7 @@ import TalentSearch, { TalentFilters } from '../../components/talent/TalentSearc
 import TalentList from '../../components/talent/TalentList';
 import { Talent } from '../../types/Talent';
 
-const TalentDirectory: React.FC = () => {
+const TalentDirectory = () => {
   const [talents, setTalents] = useState<Talent[]>([]);
   const [filteredTalents, setFilteredTalents] = useState<Talent[]>([]);
 
