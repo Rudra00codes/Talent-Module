@@ -4,15 +4,15 @@ export interface Talent {
   name: string;
   email: string;
   phone: string;
-  skills: {
+  profilePhoto?: string;
+  description?: string;
+  skills?: {
     name: string;
-    yearsOfExperience: number;
     expertiseLevel: string;
+    yearsOfExperience: number;
   }[];
-  description: string;
-  profilePhoto: string;
-  status: string;
-  isVisible: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  status?: 'pending' | 'approved' | 'rejected';
+  isVisible?: boolean;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
