@@ -107,10 +107,10 @@ const RegistrationForm: React.FC = () => {
       Object.entries(formData).forEach(([key, value]) => {
         if (key === 'skills') {
           formDataToSend.append(key, JSON.stringify(value));
-        } else if (key === 'profilePhoto' && value) {
+        } else if (key === 'profilePhoto' && value instanceof File) {
           formDataToSend.append(key, value);
         } else {
-          formDataToSend.append(key, String(value));
+          formDataToSend.append(key, String(value ?? ''));
         }
       });
 
