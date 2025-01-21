@@ -18,5 +18,5 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src/**/*"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{ "path": "./talent-platform/talent-platform-frontend/tsconfig.node.json" }]
 }
