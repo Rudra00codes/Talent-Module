@@ -11,14 +11,15 @@
 
 
 ## 🏆 Hackathon Submission
-This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
+
+#### This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
 
 ### Team Details
 | Name | Role | GitHub |
 |------|------|--------|
-| Yugandhar Bhardwaj | Project Manager | [@github](https://github.com) |
+| Yugandhar Bhardwaj | Project Lead | [@github](https://github.com) |
 | Rudra Pratap Singh | Frontend-Backend Integrator | [@Rudra00codes](https://github.com/Rudra00codes) |
-| Anant Srivastava | Feature Developer | [@RoboShep](https://github.com)
+| Anant Srivastava | Backend and Feature Developer | [@RoboShep](https://github.com)
 | Prince Sharma |  Researcher  | [@github](https://github.com) |
 | Aditya Punj | UI/UX Designer | [@github](https://github.com) |
 
@@ -30,24 +31,34 @@ JPD Hub needs a Talent Module that connects talented individuals with clients wh
 - Facilitate hiring process management
 
 
-## 🎯 Our Solution
+## 💡 Our Solution
+### Our solution is a comprehensive talent management platform that streamlines the process of connecting talented individuals with potential clients, while ensuring quality through admin verification.
+
 <div align="center">
   <img src="public/solution-overview.png" alt="Solution Overview" width="80%">
 </div>
 
-### Key Features
-- 👤 **Smart Talent Profiles**
-  - Skill-based categorization
-  - Portfolio integration
-  - Experience verification
-- 🔍 **Advanced Search & Filters**
-  - Multi-parameter search
-  - Experience level filtering
-  - Skill-based matching
-- 👮 **Admin Dashboard**
-  - Profile verification system
-  - Analytics and reporting
-  - User management
+### Key Features Implemented
+1. **Talent Registration & Admin Approval** ✅
+   - Secure registration form with validation
+   - Profile photo upload with preview
+   - Admin review system
+   - Email/WhatsApp notifications
+
+2. **Talent Profile Display** ✅
+   - Clean, responsive UI
+   - Advanced search and filters
+   - Skill-based categorization
+
+3. **Client Interaction** ✅
+   - Seamless browsing experience
+   - Secure hire request system
+   - Real-time notifications
+
+4. **Admin Dashboard** ✅
+   - Profile verification system
+   - Request management
+   - Analytics and reporting
 
 ## 🖥️ Demo & Screenshots
 
@@ -94,11 +105,11 @@ graph TD
 <br>
 
 - **Frontend**: React.js with TypeScript
-- **State Management**: React Context API
-- **Styling**: Styled-components
-- **Testing**: Jest and React Testing Library
-- **Build Tool**: Vite
-- **Package Manager**: npm
+- **Backend**: Node.js
+- **Database**: MongoDB
+- **File Storage**: AWS S3
+- **Notifications**: Twilio WhatsApp API
+- **Styling**: Tailwind CSS
 
 ## 📂 Project Structure
 
@@ -192,23 +203,28 @@ talent-platform/
 - Node.js (v14 or higher)
 - npm (v6 or higher)
 
-### Installation
+## 🚀 Installation & Setup
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/talent-platform.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd talent-platform/talent-platform-frontend
-    ```
-3. Install dependencies:
-    ```bash
-    npm install
-    ```
+   ```bash
+   git clone https://github.com/yourusername/talent-platform.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   cd talent-platform
+   npm install
+   ```
+
+3. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   # Update .env with your credentials
+   ```
+
 4. Start the development server:
-    ```bash
-    npm run dev
+   ```bash
+   npm run dev
     ```
 5. Open your browser and navigate to `http://localhost:3000` to view the application.
 
@@ -224,7 +240,7 @@ talent-platform/
 - [Redux Toolkit](https://redux-toolkit.js.org/) - The official, opinionated, batteries-included toolset for efficient Redux development.
 - [React Query](https://react-query.tanstack.com/) - A powerful data-fetching library for React.
 - [React Hook Form](https://react-hook-form.com/) - A library for managing forms in React.
-- [Zod](https://zod.dev/) - A TypeScript-first schema declaration and validation library.
+
 - [ESLint](https://eslint.org/) - A tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
 - [Conventional Commits](https://www.conventionalcommits.org/) - A specification for adding human and machine-readable meaning to commit messages.
 
@@ -247,6 +263,33 @@ This project follows these key principles:
 - **Context API**: For state management, avoiding Redux complexity for our use case
 - **Custom Hooks**: For reusable logic and cleaner components
 
+
+## 📱 Features & Screenshots
+
+<div align="center">
+  <img src="public/screenshots/registration.png" alt="Registration Form" width="45%">
+  <img src="public/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="45%">
+</div>
+
+### Feature Highlights
+- **Smart Form Validation**: Real-time validation with helpful error messages
+- **Responsive Design**: Works seamlessly on all devices
+- **Secure File Upload**: Support for profile photo upload with preview
+- **Admin Controls**: Comprehensive dashboard for profile management
+
+## 🔒 Security Features
+- Input validation and sanitization
+- Secure file upload handling
+- Protected admin routes
+- Rate limiting for API endpoints
+
+## 🎯 Future Scope
+- [ ] AI-powered talent matching
+- [ ] Video interview integration
+- [ ] Blockchain-based skill verification
+- [ ] Mobile application
+- [ ] Advanced analytics dashboard
+
 ## 📚 Documentation
 
 Additional documentation can be found in the `/docs` directory:
@@ -255,11 +298,6 @@ Additional documentation can be found in the `/docs` directory:
 - Component Documentation
 - Contributing Guidelines
 
-## 🤝 Future Scope
-<input disabled="" type="checkbox"> AI-powered talent matching
-<input disabled="" type="checkbox"> Integrated video interview platform
-<input disabled="" type="checkbox"> Blockchain-based skill verification
-<input disabled="" type="checkbox"> Mobile application development
 
 ## 🤝 Contributing
 
@@ -269,11 +307,12 @@ Additional documentation can be found in the `/docs` directory:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-🙏 Acknowledgements
-JPD Hub for the opportunity
-Advitiya IIT Ropar for hosting
-[ third-party resources]
+## 🙏 Acknowledgments
+- JPD Hub for the opportunity
+- Advitiya IIT Ropar for hosting
+- All open-source libraries used in this project
 
 ## 📄 License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
+
