@@ -1,56 +1,75 @@
-import axios from 'axios';
+import { sendEmail } from './emailService';
+import { sendWhatsAppMessage } from '../config/whatsapp';
 
-export class NotificationService {
-  private static readonly API_URL = process.env.WHATSAPP_API_URL;
-  private static readonly API_KEY = process.env.WHATSAPP_API_KEY;
-
-  static async sendWhatsAppNotification(
-    to: string,
-    template: string,
-    data: Record<string, any>
-  ) {
-    try {
-      await axios.post(
-        `${this.API_URL}/messages`,
-        {
-          to,
-          template,
-          data
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${this.API_KEY}`
-          }
-        }
-      );
-    } catch (error) {
-      console.error('WhatsApp notification failed:', error);
-      throw error;
-    }
-  }
-
-  static async notifyAdminNewTalent(talent: Talent) {
-    await this.sendWhatsAppNotification(
-      process.env.ADMIN_PHONE_NUMBER!,
-      'new_talent_registration',
-      {
-        talentName: talent.name,
-        talentEmail: talent.email,
-        approvalLink: `${process.env.ADMIN_DASHBOARD_URL}/talents/${talent.id}`
-      }
-    );
-  }
-
-  static async notifyAdminHireRequest(request: HireRequest, client: Client, talent: Talent) {
-    await this.sendWhatsAppNotification(
-      process.env.ADMIN_PHONE_NUMBER!,
-      'new_hire_request',
-      {
-        clientName: client.name,
-        talentName: talent.name,
-        projectDescription: request.projectDescription,
-        requestLink: `${process.env.ADMIN_DASHBOARD_URL}/requests/${request.id}`
-      }
-    );
-  }
+interface NotificationOptions {
+  to: string;
+  subject?: string;
+  message: string;
 }
+
+export const sendAdminNotification = async (
+  talentId: string, 
+  notificationType: 'email' | 'whatsapp'
+): Promise<boolean> => {
+  try {
+    if (!talentId) {
+      throw new Error('Talent ID is required');
+    }
+
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPhone = process.env.ADMIN_PHONE;
+
+    const message = `New talent registration pending approval. ID: ${talentId}`;
+    
+    if (notificationType === 'email') {
+      if (!adminEmail) {
+        throw new Error('Admin email not configured');
+      }
+      await sendEmail({
+        to: adminEmail,
+        subject: 'New Talent Registration',
+        message
+      });
+    } else if (notificationType === 'whatsapp') {
+      if (!adminPhone) {
+        throw new Error('Admin phone not configured');
+      }
+      await sendWhatsAppMessage(adminPhone, message);
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Failed to send admin notification:', error);
+    throw error;
+  }
+};
+
+export const sendTalentNotification = async (
+  talentId: string,
+  status: 'approved' | 'rejected',
+  notificationType: 'email' | 'whatsapp',
+  contactInfo: string  // email or phone number
+): Promise<boolean> => {
+  try {
+    if (!talentId || !status || !contactInfo) {
+      throw new Error('Missing required parameters');
+    }
+
+    const message = `Your profile has been ${status}. ID: ${talentId}`;
+    
+    if (notificationType === 'email') {
+      await sendEmail({
+        to: contactInfo,
+        subject: `Profile ${status.toUpperCase()}`,
+        message
+      });
+    } else if (notificationType === 'whatsapp') {
+      await sendWhatsAppMessage(contactInfo, message);
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Failed to send talent notification:', error);
+    throw error;
+  }
+};
