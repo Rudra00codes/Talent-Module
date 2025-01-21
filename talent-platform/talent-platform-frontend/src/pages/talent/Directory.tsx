@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import TalentSearch, { TalentFilters } from '../../components/talent/TalentSearch';
+import  { TalentFilters } from '../../components/talent/TalentSearch';
 import TalentList from '../../components/talent/TalentList';
-import { Talent } from '../../types/Talent';
+import { Talent } from '../../types/talent';
+import TalentSearch from '../../components/talent/TalentSearch';
 
-const TalentDirectory = () => {
+const Directory: React.FC = () => {
   const [talents, setTalents] = useState<Talent[]>([]);
   const [filteredTalents, setFilteredTalents] = useState<Talent[]>([]);
 
@@ -40,10 +41,10 @@ const TalentDirectory = () => {
   const handleSearch = (filters: TalentFilters) => {
     const filtered = talents.filter(talent => {
       const matchesSearch = talent.name.toLowerCase().includes(filters.searchTerm.toLowerCase()) ||
-        talent.description.toLowerCase().includes(filters.searchTerm.toLowerCase());
+        (talent.description && talent.description.toLowerCase().includes(filters.searchTerm.toLowerCase()));
       
       const matchesLevel = !filters.experienceLevel || 
-        talent.skills.some(skill => skill.expertiseLevel === filters.experienceLevel);
+        (talent.skills && talent.skills.some(skill => skill.expertiseLevel === filters.experienceLevel));
 
       return matchesSearch && matchesLevel;
     });
@@ -53,11 +54,11 @@ const TalentDirectory = () => {
 
   return (
     <div className="talent-directory">
-      <h1>Find Talent</h1>
+      <h1 className="text-2xl font-bold mb-4">Talent Directory</h1>
       <TalentSearch onSearch={handleSearch} />
       <TalentList talents={filteredTalents} />
     </div>
   );
 };
 
-export default TalentDirectory;
+export default Directory;

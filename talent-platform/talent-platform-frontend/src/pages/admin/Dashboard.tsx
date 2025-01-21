@@ -1,84 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { Talent } from '../../types/Talent';
-import { approveProfile, rejectProfile } from '../../services/adminService';
+import { useState, useEffect } from 'react';
+import { Talent } from '../../types/talent';
+import { approveProfile, rejectProfile, getPendingProfiles } from '@services/adminService';
 
 const AdminDashboard = () => {
   const [pendingProfiles, setPendingProfiles] = useState<Talent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // Fetch pending profiles
-    fetchPendingProfiles();
+    loadPendingProfiles();
   }, []);
 
-  const fetchPendingProfiles = async () => {
+  const loadPendingProfiles = async () => {
     try {
-      const response = await fetch('/api/admin/pending-profiles');
-      const data = await response.json();
+      const data = await getPendingProfiles();
       setPendingProfiles(data);
-    } catch (error) {
-      console.error('Error fetching pending profiles:', error);
+    } catch (err) {
+      setError('Failed to load pending profiles');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleApprove = async (talentId: string) => {
+  const handleApprove = async (profileId: string) => {
     try {
-      await approveProfile(talentId);
-      // Remove from pending list
-      setPendingProfiles(prev => prev.filter(profile => profile.id !== talentId));
-      // Trigger notification to talent
-    } catch (error) {
-      console.error('Error approving profile:', error);
+      await approveProfile(profileId);
+      // Refresh the list after approval
+      loadPendingProfiles();
+    } catch (err) {
+      setError('Failed to approve profile');
     }
   };
 
-  const handleReject = async (talentId: string) => {
+  const handleReject = async (profileId: string, reason?: string) => {
     try {
-      await rejectProfile(talentId);
-      // Remove from pending list
-      setPendingProfiles(prev => prev.filter(profile => profile.id !== talentId));
-      // Trigger notification to talent
-    } catch (error) {
-      console.error('Error rejecting profile:', error);
+      await rejectProfile(profileId, reason);
+      // Refresh the list after rejection
+      loadPendingProfiles();
+    } catch (err) {
+      setError('Failed to reject profile');
     }
   };
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="admin-dashboard">
-      <h1>Admin Dashboard</h1>
-      <section className="pending-profiles">
-        <h2>Pending Profiles ({pendingProfiles.length})</h2>
-        {pendingProfiles.map(profile => (
-          <div key={profile.id} className="profile-card">
-            <img src={profile.profilePhoto} alt={profile.name} />
-            <div className="profile-details">
-              <h3>{profile.name}</h3>
-              <p>{profile.email}</p>
-              <p>{profile.description}</p>
-              <div className="skills">
-                {profile.skills.map(skill => (
-                  <span key={skill.name} className="skill-tag">
-                    {skill.name} ({skill.expertiseLevel})
-                  </span>
-                ))}
-              </div>
-            </div>
-            <div className="action-buttons">
-              <button 
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+      <div className="grid gap-4">
+        {pendingProfiles.map((profile: any) => (
+          <div key={profile.id} className="border p-4 rounded">
+            <h2>{profile.name}</h2>
+            <div className="flex gap-2 mt-2">
+              <button
                 onClick={() => handleApprove(profile.id)}
-                className="approve-btn"
+                className="bg-green-500 text-white px-4 py-2 rounded"
               >
                 Approve
               </button>
-              <button 
+              <button
                 onClick={() => handleReject(profile.id)}
-                className="reject-btn"
+                className="bg-red-500 text-white px-4 py-2 rounded"
               >
                 Reject
               </button>
             </div>
           </div>
         ))}
-      </section>
+      </div>
     </div>
   );
 };
