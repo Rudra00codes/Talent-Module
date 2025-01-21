@@ -71,22 +71,27 @@ JPD Hub needs a Talent Module that connects talented individuals with clients wh
 
 ## 📊 Architecture
 
-#### The architecture of the Talent Platform consists of a React frontend that communicates with a Node.js backend.
-
-#### The backend handles various services such as CRUD operations, file storage, SMS and email services, authentication, logging, monitoring, and containerization. Below is a visual representation of the architecture:
+#### The Talent Platform uses a simple three-tier architecture with React frontend, Node.js backend, and MongoDB database.
 
 ```mermaid
 graph TD
     A[Client] -->|HTTP| B[React Frontend]
     B -->|API Calls| C[Node.js Backend]
-    C -->|File Storage| F[Google Cloud Storage]
-    C -->|File Storage| E[AWS S3]
-    C -->|SMS Service| G[Twilio]
-    C -->|Email Service| H[SendGrid]
-    C -->|Authentication| I[Auth0]
-    C -->|Logging| J[Elastic Stack]
-    C -->|Monitoring| K[Prometheus]
-    C -->|Containerization| L[Docker]
+    C -->|Database Queries| D[MongoDB]
+    C -->|File Storage| E[Local Storage]
+    C -->|Email Service| F[Nodemailer]
+    
+    subgraph Frontend
+        B -->|React Components| B1[Talent Registration]
+        B -->|React Components| B2[Admin Dashboard]
+        B -->|React Components| B3[Client Interface]
+    end
+    
+    subgraph Backend Services
+        C -->|Express Routes| C1[Talent Routes]
+        C -->|Express Routes| C2[Admin Routes]
+        C -->|Middleware| C3[Authentication]
+    end
 ```
 
 ## 🛠️ Technology Stack
@@ -196,35 +201,124 @@ talent-platform/
 ## 🚦 Getting Started
 
 ### Prerequisites
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+- MongoDB (v6 or higher)
+- MongoDB Compass (for database management)
+- Git vcs
 
-- Node.js (v14 or higher)
-- npm (v6 or higher)
+### Required Dependencies
+
+<details>
+  <summary>Check the list</summary>
+
+#### Frontend
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Axios
+- React Router DOM
+- React Toastify
+
+#### Backend
+- Express.js
+- MongoDB/Mongoose
+- TypeScript
+- Cors
+- Dotenv
+- Multer (for file uploads)
+- Nodemailer (for email notifications)
+
+</details>
+
 
 ## 🚀 Installation & Setup
 
-1. Clone the repository:
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/talent-platform.git
-   ```
-
-2. Install dependencies:
-   ```bash
    cd talent-platform
+   ```
+
+2. **Backend Setup:**
+   ```bash
+   # Navigate to backend directory
+   cd backend
+
+   # Install dependencies
    npm install
-   ```
 
-3. Set up environment variables:
-   ```bash
+   # Create .env file
    cp .env.example .env
+
    # Update .env with your credentials
+   MONGODB_URI=mongodb://localhost:27017/talent-platform
+   PORT=8080
+
+   # Start the backend server
+   npm run dev
+
+
+3. **Frontend Setup:**
+   ```bash
+   # Open a new terminal
+   cd talent-platform-frontend
+
+   # Install dependencies
+   npm install
+
+   # Start the frontend development server
+   npm run dev
+
+4. **Database Setup:**
+   - Open MongoDB Compass
+   - Connect to: `mongodb://localhost:27017`
+   - Create a new database named `talent-platform`
+   - Create collections: `talents`, `users`, `requests`
+
+
+5. **Verify Setup:**
+   - Backend should be running on: `http://localhost:8080`
+   - Frontend should be running on: `http://localhost:5173`
+   - MongoDB should be connected (check backend console)
+   - MongoDB Compass should show your database
+
+   
+### Running the Project
+
+<details>
+  <summary>Expand to View</summary>
+
+1. **Start MongoDB:**
+   - Ensure MongoDB service is running
+   - Keep MongoDB Compass open for database monitoring
+
+2. **Start Backend Server:**
+   ```bash
+   cd backend
+   npm run dev
    ```
 
-4. Start the development server:
+3. **Start Frontend Development Server:**
    ```bash
+   cd talent-platform-frontend
    npm run dev
-    ```
-5. Open your browser and navigate to `http://localhost:3000` to view the application.
+   ```
 
+4. **Access the Application:**
+   - Frontend: `http://localhost:5173`
+   - Backend API: `http://localhost:8080`
+   - Admin Dashboard: `http://localhost:5173/admin`
+
+### Troubleshooting
+- If MongoDB fails to connect, ensure the MongoDB service is running
+- If ports are occupied, update PORT in backend `.env`
+- For frontend build issues, try clearing npm cache:
+  ```bash
+  npm cache clean --force
+
+</details>
 
 ## 📱 Features & Screenshots
 
@@ -263,8 +357,17 @@ talent-platform/
 | Prince Sharma |  Researcher  | [@github](https://github.com) |
 | Aditya Punj | UI/UX Designer | [@github](https://github.com) |
 
+<br>
 
+# Create a zip file
 
+```bash
+zip -r talent-platform.zip talent-platform/ \
+   -x "talent-platform/node_modules/*" \
+   -x "talent-platform/*/node_modules/*" \
+   -x "talent-platform/.git/*" \
+   -x "talent-platform/*/.env"
+```
 ## 🙏 Acknowledgments
 - JPD Hub for the opportunity
 - Advitiya IIT Ropar for hosting
