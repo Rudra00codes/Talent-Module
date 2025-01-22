@@ -12,20 +12,26 @@
 
 ## 🏆 Hackathon Submission
 
-<div style="display: flex; align-items: center; gap: 20px;">
-  <div>
-    This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
-  </div>
-  <img src="/talent-platform/talent-platform-frontend/public/JPD_Card.png" alt="JPD Hub Card" width="300px" style="border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-</div>
+#### This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
+
+
 
 
 ## 💡 Problem Statement
-JPD Hub needs a Talent Module that connects talented individuals with clients while maintaining admin control. The platform should:
+
+<div style="display: flex; align-items: center; gap: 20px;">
+  <div>
+
+#### JPD Hub needs a Talent Module that connects talented individuals with clients while maintaining admin control. The platform should:
+
 - Enable talent registration and profile management
 - Provide client access to talent pool
 - Include admin controls for profile verification
 - Facilitate hiring process management
+  </div>
+  
+  <img src="/talent-platform/talent-platform-frontend/public/JPD_Card.png" alt="JPD Hub Card" width="300px" style="border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+</div>
 
 
 ## 💡 Our Solution
@@ -57,17 +63,17 @@ JPD Hub needs a Talent Module that connects talented individuals with clients wh
    - Request management
    - Analytics and reporting
 
-## 🖥️ Demo & Screenshots
+<!-- ## 🖥️ Demo & Screenshots
 
 <div align="center">
   <img src="public/screenshots/dashboard.png" alt="Dashboard" width="45%">
   <img src="public/screenshots/profile.png" alt="Profile Page" width="45%">
-</div>
+</div> -->
 
-### 🔗 Live Demo
+<!-- ### 🔗 Live Demo
 - [Frontend Application](https://your-demo-link.com)
 - [Admin Dashboard](https://your-admin-demo.com)
-- [Demo Video](https://youtube.com/your-demo-video)
+- [Demo Video](https://youtube.com/your-demo-video) -->
 
 ## 📊 Architecture
 
@@ -93,6 +99,236 @@ graph TD
         C -->|Middleware| C3[Authentication]
     end
 ```
+
+<br>
+
+## 📝 UI Wireframes (Rough Layout)
+
+<details>
+  <summary>Click to expand!</summary>
+
+> **Note**: These are ASCII art representations of our planned UI layout, not the final design. They serve as a basic visualization of component structure and user flow.
+
+### 🏠 Home Page Layout
+
+```bash
++-------------Home Page / Landing-----------------+
+|                                                |
+|     🎯 Connect with Top Tech Talent            |
+|     Find the perfect talent for your project   |
+|                                                |
+|     [Browse Talents]  [Register as Talent]     |
+|                                                |
+|  +----------------Features------------------+  |
+|  |                                          |  |
+|  |  🔍 Easy Search    🔒 Verified Profiles |  |
+|  |  📝 Quick Apply    ⭐ Top Talent        |  |
+|  |                                          |  |
+|  +-----------------------------------------+   |
++------------------------------------------------+
+
+```
+
+### 📋 Registration Form Layout
+
+```bash
++------------------------------------------+
+|           Talent Platform                 |
+|  [Logo]     Browse  Register   Admin     |
++------------------------------------------+
+
++------------------Registration Form----------------+
+|                                                  |
+|                 [Photo Upload]                   |
+|                     ⭕️                          |
+|                                                  |
+|  Full Name: +-------------------------+          |
+|             |                         |          |
+|             +-------------------------+          |
+|                                                  |
+|  Email:    +-------------------------+          |
+|             |                         |          |
+|             +-------------------------+          |
+|                                                  |
+|  Skills:    +-------------+ [Add Skill]         |
+|             |             |                      |
+|             +-------------+                      |
+|                                                  |
+|  [JavaScript] [React] [Node.js] [MongoDB]       |
+|     (clickable tags with 'x' to remove)         |
+|                                                  |
+|  Bio:       +-------------------------+          |
+|             |                         |          |
+|             |                         |          |
+|             +-------------------------+          |
+|                                                  |
+|          [    Submit Registration    ]           |
+|                                                  |
++--------------------------------------------------+
+```
+
+### 🔍 Talent Directory Layout
+
+```bash
++-------------------Talent Directory----------------+
+|  Search: +----------------+ [Search]             |
+|                                                  |
+|  +----------------+ +------------------+         |
+|  | Talent Card 1  | | Talent Card 2    |         |
+|  | [Photo]        | | [Photo]          |         |
+|  | Name           | | Name             |         |
+|  | Skills         | | Skills           |         |
+|  | Bio            | | Bio              |         |
+|  +----------------+ +------------------+         |
+|                                                  |
+|  +----------------+ +------------------+         |
+|  | Talent Card 3  | | Talent Card 4    |         |
+|  | [Photo]        | | [Photo]          |         |
+|  | Name           | | Name             |         |
+|  | Skills         | | Skills           |         |
+|  | Bio            | | Bio              |         |
+|  +----------------+ +------------------+         |
++--------------------------------------------------+
+```
+
+### 👤 Profile Page Layout
+
+```bash
++--------------Talent Profile Page----------------+
+|                                                |
+|    [Profile Photo]     Status: ✅ Verified     |
+|    John Doe                                    |
+|    Full-Stack Developer                        |
+|                                                |
+|    Skills:                                     |
+|    [React] [Node.js] [MongoDB] [TypeScript]    |
+|                                                |
+|    About Me:                                   |
+|    +--------------------------------------+    |
+|    | Professional developer with 5 years...|   |
+|    +--------------------------------------+    |
+|                                                |
+|    Projects:                                   |
+|    - E-commerce Platform                       |
+|    - Social Media App                          |
+|                                                |
+|    [Contact] [Download CV] [Hire Me]           |
++------------------------------------------------+
+
+```
+
+
+### 📊 Admin Dashboard Layout
+
+```bash
++-------------------Admin Dashboard----------------+
+|                                                  |
+|  Pending Approvals (3)                          |
+|  +----------------------------------------+     |
+|  | [Photo] Name: John Doe                 |     |
+|  | Skills: React, Node.js                 |     |
+|  | [Approve] [Reject]                     |     |
+|  +----------------------------------------+     |
+|                                                 |
+|  +----------------------------------------+     |
+|  | [Photo] Name: Jane Smith               |     |
+|  | Skills: Python, AWS                    |     |
+|  | [Approve] [Reject]                     |     |
+|  +----------------------------------------+     |
++--------------------------------------------------+
+
+```
+```bash
++---------------Search Results--------------------+
+|  Filters:                                      |
+|  Skills: [×React] [×Node.js]                   |
+|  Experience: [0-2] [2-5] [5+] years            |
+|  Location: [Remote] [On-site]                  |
+|                                                |
+|  Found 15 matches                              |
+|  +----------------+ +------------------+       |
+|  | [Photo]        | | [Photo]          |       |
+|  | Sarah Chen     | | Mike Johnson     |       |
+|  | React Expert   | | Full-Stack Dev   |       |
+|  | ⭐⭐⭐⭐⭐    | | ⭐⭐⭐⭐        |       | 
+|  +----------------+ +------------------+       |
++------------------------------------------------+
+```
+
+```bash
++--------------Admin Analytics--------------------+
+|                                                |
+|  📊 Dashboard Overview                         |
+|  +-------------------+ +-------------------+   |
+|  | New Registrations | | Pending Approvals |   |
+|  |        24         | |         7         |   |
+|  +-------------------+ +-------------------+   |
+|                                                |
+|  🔍 Recent Activity                            |
+|  | Time     | Action    | User              |  |
+|  | 10:45 AM | Approved  | John Doe          |  |
+|  | 10:30 AM | Rejected  | Invalid Profile   |  |
+|  | 10:15 AM | New Reg.  | Sarah Chen        |  |
+|                                                |
+|  📈 Weekly Stats                               |
+|  +--------------------------------------+      |
+|  |    ▁▃▅▇█▇▅  Registrations           |       |
+|  |    ▂▄▆▇▆▄▂  Approvals              |        |
+|  +--------------------------------------+      |
++------------------------------------------------+
+
+```
+
+```bash
++-------------Notification Panel------------------+
+|  🔔 Notifications                              |
+|                                                |
+|  [Today]                                       |
+|  • Profile approved by admin                   |
+|  • New message from client                     |
+|                                                |
+|  [Yesterday]                                   |
+|  • Profile view by Company XYZ                 |
+|  • Skills endorsed by peer                     |
+|                                                |
+|  [Settings ⚙️]                                 |
+|  □ Email notifications                         |
+|  □ Push notifications                          |
++------------------------------------------------+
+
+```
+
+```bash
++-------------Message Center---------------------+
+|  📨 Messages                                  |
+|  +------------------------------------------+ |
+|  | Search messages...        [Filter ▼]     | |
+|  +------------------------------------------+ |
+|                                               |
+|  [Active Chats]                               |
+|  +------------------------------------------+ |
+|  | 🟢 Tech Corp                             | |
+|  | Latest: When can you start...            | |
+|  +------------------------------------------+ |
+|  | 🔴 StartUp Inc                           | |
+|  | Latest: Thanks for your time...          | |
+|  +------------------------------------------+ |
++----------------------------------------------+
+
+```
+</details>
+
+> These wireframes demonstrate the basic structure and component relationships in our application. The actual implementation uses modern UI components with Tailwind CSS styling.
+
+
+### 🔄 Component Relationships
+- Home Page → Registration/Directory
+- Directory → Individual Profiles
+- Admin Dashboard → Profile Management
+- Profile → Messaging System
+
+<br>
+<hr>
 
 ## 🛠️ Technology Stack
 
