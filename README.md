@@ -364,6 +364,18 @@ graph TD
   <summary>Check the list</summary>
 
 #### Frontend
+```bash
+# Core Dependencies
+npm create vite@latest talent-platform-frontend -- --template react-ts
+cd talent-platform-frontend
+npm install
+
+# Additional Dependencies
+npm install axios react-router-dom react-toastify
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
 - React 18
 - TypeScript
 - Vite
@@ -373,6 +385,22 @@ graph TD
 - React Toastify
 
 #### Backend
+```bash
+# Create and setup backend
+mkdir backend
+cd backend
+npm init -y
+npm install typescript ts-node @types/node -D
+npx tsc --init
+
+# Core Dependencies
+npm install express mongoose cors dotenv
+
+# Additional Dependencies
+npm install multer nodemailer
+npm install @types/express @types/cors @types/multer @types/nodemailer -D
+```
+
 - Express.js
 - MongoDB/Mongoose
 - TypeScript
