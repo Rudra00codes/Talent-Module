@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import  { TalentFilters } from '../../components/talent/TalentSearch';
 import TalentList from '../../components/talent/TalentList';
-import { Talent } from '../../types/talent';
 import TalentSearch from '../../components/talent/TalentSearch';
+import { Talent } from '../../types/talent';
 
 const Directory: React.FC = () => {
   const [talents, setTalents] = useState<Talent[]>([]);
-  const [filteredTalents, setFilteredTalents] = useState<Talent[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     // Fetch talents from API or data source
-    // This is a placeholder for actual data fetching logic
     fetchTalents().then(data => {
       setTalents(data);
-      setFilteredTalents(data);
     });
   }, []);
 
@@ -38,25 +35,15 @@ const Directory: React.FC = () => {
     ];
   };
 
-  const handleSearch = (filters: TalentFilters) => {
-    const filtered = talents.filter(talent => {
-      const matchesSearch = talent.name.toLowerCase().includes(filters.searchTerm.toLowerCase()) ||
-        (talent.description && talent.description.toLowerCase().includes(filters.searchTerm.toLowerCase()));
-      
-      const matchesLevel = !filters.experienceLevel || 
-        (talent.skills && talent.skills.some(skill => skill.expertiseLevel === filters.experienceLevel));
-
-      return matchesSearch && matchesLevel;
-    });
-
-    setFilteredTalents(filtered);
+  const handleSearch = (term: string) => {
+    setSearchQuery(term);
   };
 
   return (
-    <div className="talent-directory">
-      <h1 className="text-2xl font-bold mb-4">Talent Directory</h1>
+    <div className="max-w-7xl mx-auto py-8 px-4">
+      <h1 className="text-2xl font-bold mb-6">Talent Directory</h1>
       <TalentSearch onSearch={handleSearch} />
-      <TalentList talents={filteredTalents} />
+      <TalentList talents={talents} searchQuery={searchQuery} />
     </div>
   );
 };

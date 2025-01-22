@@ -1,33 +1,33 @@
 import axios from 'axios';
 
-interface ProfileResponse {
-  success: boolean;
-  message: string;
-}
-
-export const approveProfile = async (profileId: string): Promise<ProfileResponse> => {
-  try {
-    const response = await axios.put(`/api/admin/profiles/${profileId}/approve`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to approve profile');
-  }
-};
-
-export const rejectProfile = async (profileId: string, reason?: string): Promise<ProfileResponse> => {
-  try {
-    const response = await axios.put(`/api/admin/profiles/${profileId}/reject`, { reason });
-    return response.data;
-  } catch (error) {
-    throw new Error('Failed to reject profile');
-  }
-};
+const API_URL = 'http://localhost:8080/api/admin';
 
 export const getPendingProfiles = async () => {
   try {
-    const response = await axios.get('/api/admin/profiles/pending');
+    const response = await axios.get(`${API_URL}/pending-talents`);
     return response.data;
   } catch (error) {
-    throw new Error('Failed to fetch pending profiles');
+    console.error('Error fetching pending profiles:', error);
+    throw error;
+  }
+};
+
+export const approveProfile = async (id: string) => {
+  try {
+    const response = await axios.put(`${API_URL}/approve/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error approving profile:', error);
+    throw error;
+  }
+};
+
+export const rejectProfile = async (id: string) => {
+  try {
+    const response = await axios.put(`${API_URL}/reject/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error rejecting profile:', error);
+    throw error;
   }
 }; 
