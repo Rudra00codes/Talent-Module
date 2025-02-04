@@ -14,6 +14,7 @@
 
 #### This project was developed for the JPD Hub x Advitiya Hackathon 2025, IIT Ropar.
 
+**Third Place Winner** 🥉 at JPDxAdvitiya Hackathon 2025
 
 
 
