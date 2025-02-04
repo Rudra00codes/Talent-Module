@@ -1,6 +1,6 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import connectDB from './config/database';
 import cors from 'cors';
 import talentRoutes from './routes/talentRoutes';
 import adminRoutes from './routes/adminRoutes';
@@ -8,11 +8,14 @@ import adminRoutes from './routes/adminRoutes';
 dotenv.config();
 const app = express();
 
-// Middleware
+// Enable CORS
 app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
+  origin: 'http://localhost:5173', // Adjust this to your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Allow credentials if needed
 }));
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -20,19 +23,51 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/talent', talentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Connect to MongoDB and start server
-const PORT = process.env.PORT || 8080;
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI!)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-const startServer = async () => {
+// Define the Talent Schema
+const talentSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  skills: [String],
+  status: { type: String, default: 'pending' }
+});
+
+const Talent = mongoose.model('Talent', talentSchema);
+
+// Define the /api/talents route
+app.get('/api/talents', async (req, res) => {
   try {
-    await connectDB();
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`);
-    });
+    const talents = await Talent.find();
+    res.json(talents);
   } catch (error) {
-    console.error('Server startup error:', error);
-    process.exit(1);
+    res.status(500).json({ message: 'Error fetching talents' });
   }
-};
+});
 
-startServer();
+// Define the /api/talents/register route
+app.post('/api/talents/register', async (req, res) => {
+  const { name, email, skills } = req.body;
+  const newTalent = new Talent({ name, email, skills });
+  
+  try {
+    await newTalent.save();
+    res.status(201).json(newTalent);
+  } catch (error) {
+    res.status(500).json({ message: 'Error saving talent', error });
+  }
+});
+
+// Root route
+app.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
+// Start server
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
