@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 interface FormData {
   name: string;
@@ -47,8 +48,17 @@ const Registration: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log(formData);
+    try {
+      const response = await axios.post('http://localhost:8080/api/talents/register', {
+        name: formData.name,
+        email: formData.email,
+        skills: formData.skills,
+        // Add other fields as necessary
+      });
+      console.log('Registration successful:', response.data);
+    } catch (error) {
+      console.error('Error registering talent:', error);
+    }
   };
 
   return (
