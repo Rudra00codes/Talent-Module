@@ -1,4 +1,4 @@
-import { sendEmail } from './emailService';
+import { sendEmail } from './emailServices';
 import { sendWhatsAppMessage } from '../config/whatsapp';
 
 interface NotificationOptions {

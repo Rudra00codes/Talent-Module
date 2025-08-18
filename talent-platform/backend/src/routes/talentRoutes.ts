@@ -1,16 +1,17 @@
 import express from 'express';
 import { Router } from 'express';
+import talentController from '../controllers/talentController';
+import { upload } from '../services/fileUploadService';
 
 const router: Router = express.Router();
 
-// GET: Fetch all talents
-router.get('/', (req, res) => {
-  res.json({ message: 'Fetch all talents' });
-});
+// GET: Fetch all approved talents
+router.get('/', talentController.getAllTalents);
 
 // POST: Register new talent
-router.post('/register', (req, res) => {
-  res.json({ message: 'Register new talent' });
-});
+router.post('/register', upload.single('profilePhoto'), talentController.register);
+
+// GET: Get talent by ID
+router.get('/:id', talentController.getTalentById);
 
 export default router;
