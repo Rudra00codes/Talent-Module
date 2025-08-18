@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { registerTalent as registerTalentApi } from '@/services/talentService';
 import { toast } from 'react-toastify';
 
 interface FormErrors {
@@ -114,9 +114,7 @@ const RegistrationForm: React.FC = () => {
         }
       });
 
-      await axios.post('/api/talent/register', formDataToSend, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      });
+  await registerTalentApi(formDataToSend);
 
       toast.success('Registration successful! Awaiting admin approval.');
       navigate('/registration-success');

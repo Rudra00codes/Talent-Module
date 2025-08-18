@@ -430,7 +430,7 @@ npm install @types/express @types/cors @types/multer @types/nodemailer -D
    npm install
 
    # Create .env file
-   cp .env.example .env
+   copy .env.example .env
 
    # Update .env with your credentials
    MONGODB_URI=mongodb://localhost:27017/talent-platform

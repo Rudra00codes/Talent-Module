@@ -10,6 +10,7 @@ const talentSchema = new mongoose.Schema({
   }],
   description: { type: String, required: true },
   profilePhoto: { type: String },
+  rejectionReason: { type: String },
   status: { 
     type: String, 
     enum: ['pending', 'approved', 'rejected'],
