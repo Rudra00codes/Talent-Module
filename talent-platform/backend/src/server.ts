@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import talentRoutes from './routes/talentRoutes';
 import adminRoutes from './routes/adminRoutes';
+import authRoutes from './routes/authRoutes';
 import { errorHandler, notFound } from './middleware/errorHandler';
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static('uploads'));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/talent', talentRoutes);
 app.use('/api/admin', adminRoutes);
 
