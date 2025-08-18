@@ -1,20 +1,23 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import authService from '../services/authService';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
-  role: 'admin' | 'client';
+  role: 'admin' | 'client' | 'talent';
 }
 
 const ProtectedRoute = ({ children, role }: ProtectedRouteProps) => {
-  // Placeholder auth check - replace with real auth logic later
-  const userRole = localStorage.getItem('userRole');
-  
-  if (userRole !== role) {
+  // Check if user is authenticated and has the required role
+  if (!authService.isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!authService.hasRole(role)) {
     return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
 };
 
-export default ProtectedRoute; 
+export default ProtectedRoute;

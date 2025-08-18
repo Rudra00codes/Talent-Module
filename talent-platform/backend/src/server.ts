@@ -7,8 +7,8 @@ import path from 'path';
 import fs from 'fs';
 import talentRoutes from './routes/talentRoutes';
 import adminRoutes from './routes/adminRoutes';
-import connectDB from './config/database';
-import { errorHandler } from './middleware/errorHandler';
+import authRoutes from './routes/authRoutes';
+import { errorHandler, notFound } from './middleware/errorHandler';
 
 dotenv.config();
 const app = express();
@@ -16,7 +16,7 @@ const app = express();
 // Enable CORS (configurable)
 const allowedOrigin = process.env.CORS_ORIGIN || 'http://localhost:5173';
 app.use(cors({
-  origin: allowedOrigin,
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
@@ -27,22 +27,29 @@ app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Static files (profile photos)
-app.use('/uploads', express.static(path.resolve(__dirname, '../uploads')));
+// Serve uploaded files statically
+app.use('/uploads', express.static('uploads'));
 
 // Routes
+app.use('/api/auth', authRoutes);
 app.use('/api/talent', talentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Health check
-app.get('/', (_req, res) => {
-  res.send('Backend is running');
+// MongoDB connection
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/talent-platform')
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
+// Root route
+app.get('/', (req, res) => {
+  res.json({ message: 'Talent Platform API is running', version: '1.0.0' });
 });
 
-// Global error handler
+// Error handling middleware
+app.use(notFound);
 app.use(errorHandler);
 
-// Start server after DB connects
+// Start server
 const PORT = process.env.PORT || 8080;
 connectDB()
   .then(() => {

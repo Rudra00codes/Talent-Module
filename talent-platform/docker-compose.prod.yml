@@ -1,0 +1,85 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6
+    container_name: talent-platform-db-prod
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_INITDB_DATABASE: talent-platform
+    volumes:
+      - mongodb_data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - talent-network
+    # Don't expose port in production - only internal access
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: talent-platform-api-prod
+    restart: always
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/talent-platform?authSource=admin
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: 8080
+      FRONTEND_URL: ${FRONTEND_URL}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_SECURE: ${SMTP_SECURE}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASSWORD: ${SMTP_PASSWORD}
+      SMTP_FROM_EMAIL: ${SMTP_FROM_EMAIL}
+      ADMIN_EMAIL: ${ADMIN_EMAIL}
+      ADMIN_PHONE: ${ADMIN_PHONE}
+    depends_on:
+      - mongodb
+    volumes:
+      - backend_uploads:/app/uploads
+    networks:
+      - talent-network
+    # Don't expose port in production - use reverse proxy
+
+  # Frontend
+  frontend:
+    build: 
+      context: ./talent-platform-frontend
+      args:
+        VITE_API_URL: ${VITE_API_URL}
+    container_name: talent-platform-web-prod
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - talent-network
+    # Don't expose port in production - use reverse proxy
+
+  # Reverse Proxy (Nginx)
+  nginx:
+    image: nginx:alpine
+    container_name: talent-platform-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sites-available:/etc/nginx/sites-available
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - talent-network
+
+volumes:
+  mongodb_data:
+  backend_uploads:
+
+networks:
+  talent-network:
+    driver: bridge

@@ -1,11 +1,29 @@
-# Backend Dockerfile
+# Use Node.js 18 LTS
 FROM node:18-alpine
+
+# Set working directory
 WORKDIR /app
+
+# Copy package files
 COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
-COPY tsconfig.json ./
-COPY src ./src
-RUN npm run build || (npm install -D typescript ts-node-dev @types/node && npm run build)
-ENV NODE_ENV=production
+
+# Install dependencies
+RUN npm ci --only=production
+
+# Copy source code
+COPY . .
+
+# Build the TypeScript code
+RUN npm run build
+
+# Create uploads directory
+RUN mkdir -p uploads/profile-photos
+
+# Expose port
 EXPOSE 8080
-CMD ["node", "dist/server.js"]
+
+# Set environment to production
+ENV NODE_ENV=production
+
+# Start the application
+CMD ["npm", "start"]
