@@ -2,6 +2,7 @@ const Talent = require('../models/Talent');
 const User = require('../models/User');
 const NotificationService = require('../services/notificationService');
 const EmailService = require('../services/emailService');
+import WhatsAppService from '../services/whatsappService';
 
 class TalentController {
   async register(req, res) {
@@ -51,12 +52,13 @@ class TalentController {
       await talent.save();
 
       // Notify admin via WhatsApp
-      await NotificationService.sendAdminNotification({
-        type: 'new_talent_registration',
-        details: {
+      await WhatsAppService.sendNotification({
+        type: 'new_talent',
+        data: {
+          _id: talent._id,
           name: talent.name,
           email: talent.email,
-          id: talent._id
+          skills: talent.skills.map(skill => skill.name)
         }
       });
 
@@ -71,7 +73,8 @@ class TalentController {
         talent: talent
       });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      console.error('Registration error:', error);
+      res.status(500).json({ error: 'Registration failed' });
     }
   }
 }
