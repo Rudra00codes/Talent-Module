@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # MongoDB Database
+  mongodb:
+    image: mongo:6
+    container_name: talent-platform-db
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: talent-platform
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - talent-network
+
+  # Backend API
+  backend:
+    build: ./backend
+    container_name: talent-platform-api
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/talent-platform?authSource=admin
+      JWT_SECRET: your-super-secret-jwt-key-change-this-in-production
+      PORT: 8080
+      FRONTEND_URL: http://localhost:3000
+      SMTP_HOST: smtp.gmail.com
+      SMTP_PORT: 587
+      SMTP_SECURE: false
+      SMTP_USER: your_email@gmail.com
+      SMTP_PASSWORD: your_app_password
+      SMTP_FROM_EMAIL: your_email@gmail.com
+      ADMIN_EMAIL: admin@talentplatform.com
+      ADMIN_PHONE: +1234567890
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    volumes:
+      - backend_uploads:/app/uploads
+    networks:
+      - talent-network
+
+  # Frontend
+  frontend:
+    build: 
+      context: ./talent-platform-frontend
+      args:
+        VITE_API_URL: http://localhost:8080
+    container_name: talent-platform-web
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - talent-network
+
+volumes:
+  mongodb_data:
+  backend_uploads:
+
+networks:
+  talent-network:
+    driver: bridge

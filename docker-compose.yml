@@ -1,0 +1,29 @@
+version: '3.9'
+services:
+  mongo:
+    image: mongo:6
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+  backend:
+    build: ./talent-platform/backend
+    environment:
+      - PORT=8080
+      - MONGODB_URI=mongodb://mongo:27017/talent-platform
+      - CORS_ORIGIN=http://localhost:5173
+    depends_on:
+      - mongo
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./talent-platform/backend/uploads:/app/uploads
+  frontend:
+    build: ./talent-platform/talent-platform-frontend
+    depends_on:
+      - backend
+    ports:
+      - '5173:80'
+volumes:
+  mongo-data:
