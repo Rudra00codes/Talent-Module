@@ -32,8 +32,17 @@ export interface ApiResponse<T = any> {
 }
 
 class ApiService {
+  // Set auth token for requests
+  setAuthToken(token: string | null): void {
+    if (token) {
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete api.defaults.headers.common['Authorization'];
+    }
+  }
+
   // Generic request handler
-  private async request<T = any>(
+  async request<T = any>(
     method: 'get' | 'post' | 'put' | 'delete',
     url: string,
     data?: any,

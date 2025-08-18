@@ -1,16 +1,25 @@
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+import apiService, { Talent } from './apiService';
 
 export const registerTalent = async (formData: FormData) => {
-  try {
-    const response = await axios.post(`${API_URL}/talent/register`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
+  const response = await apiService.registerTalent(formData);
+  if (!response.success) {
+    throw new Error(response.error);
   }
-}; 
+  return response.data;
+};
+
+export const getAllTalents = async (): Promise<Talent[]> => {
+  const response = await apiService.getAllTalents();
+  if (!response.success) {
+    throw new Error(response.error);
+  }
+  return response.data || [];
+};
+
+export const getTalentById = async (id: string): Promise<Talent> => {
+  const response = await apiService.getTalentById(id);
+  if (!response.success) {
+    throw new Error(response.error);
+  }
+  return response.data!;
+};

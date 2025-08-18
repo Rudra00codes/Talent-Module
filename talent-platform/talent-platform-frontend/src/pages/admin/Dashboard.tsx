@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { getPendingProfiles, approveProfile, rejectProfile } from '../../services/adminService';
+import { Talent } from '../../services/apiService';
 
 const AdminDashboard: React.FC = () => {
-  const [pendingProfiles, setPendingProfiles] = useState([]);
+  const [pendingProfiles, setPendingProfiles] = useState<Talent[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
