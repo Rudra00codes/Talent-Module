@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGlobe } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaLinkedin, FaGlobe, FaRocket } from 'react-icons/fa';
 import Pattern from '../../components/Pattern'; // Adjust the path as necessary
 import Button from '../../components/common/Button/Button'; // Adjust the path as necessary
 
@@ -312,7 +312,9 @@ const Registration: React.FC = () => {
 
             {/* Submit Button */}
             <div className="flex justify-center">
-              <Button />
+              <Button type="submit" size="lg" icon={<FaRocket />}>
+                Register Now
+              </Button>
             </div>
           </form>
         </div>
