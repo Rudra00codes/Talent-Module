@@ -1,12 +1,12 @@
 # 🎯 Talent Platform - JPD Hub Hackathon 2025
 
 <div align="center">
-  <img src="/talent-platform/talent-platform-frontend/public/talentModule-baner.png" alt="Talent Platform Banner" width="100%">
+   <img src="/talent-platform/talent-platform-frontend/public/talentModule-baner.png" alt="Talent Platform Banner" width="100%">
   
-  [![Made for JPD Hub](https://img.shields.io/badge/Made%20for-JPD%20Hub-blue)](https://jpdhub.com)
-  [![Hackathon](https://img.shields.io/badge/Hackathon-Advitiya%202025-orange)](https://advitiya.iitrpr.ac.in)
-  [![Team Size](https://img.shields.io/badge/Team%20Size-5-green)]()
-  [![Status](https://img.shields.io/badge/Status-Live-success)]()
+   [![Made for JPD Hub](https://img.shields.io/badge/Made%20for-JPD%20Hub-blue)](https://jpdhub.com)
+   [![Hackathon](https://img.shields.io/badge/Hackathon-Advitiya%202025-orange)](https://advitiya.iitrpr.ac.in)
+   [![Team Size](https://img.shields.io/badge/Team%20Size-5-green)]()
+   [![Status](https://img.shields.io/badge/Status-In%20Development-yellow)]()
 </div>
 
 
@@ -20,78 +20,42 @@
 
 ## 💡 Problem Statement
 
-<div style="display: flex; align-items: center; gap: 20px;">
-  <div>
+JPD Hub needed a Talent Module that connects vetted talent with clients while preserving admin oversight for quality control and secure hiring.
 
-#### JPD Hub needs a Talent Module that connects talented individuals with clients while maintaining admin control. The platform should:
+Core needs:
+- Talent registration & profile management
+- Discoverable, filterable talent directory for clients
+- Admin verification workflow
+- Managed hire request / approval flow
 
-- Enable talent registration and profile management
-- Provide client access to talent pool
-- Include admin controls for profile verification
-- Facilitate hiring process management
-  </div>
-  
-  <img src="/talent-platform/talent-platform-frontend/public/JPD_Card.png" alt="JPD Hub Card" width="300px" style="border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
-</div>
+<img src="/talent-platform/talent-platform-frontend/public/JPD_Card.png" alt="JPD Hub Card" width="260" />
 
 
-## 💡 Our Solution
-### Our solution is a comprehensive talent management platform that streamlines the process of connecting talented individuals with potential clients, while ensuring quality through admin verification.
+## 💡 Solution Overview
+The platform streamlines talent onboarding, verification, discovery, and client interaction through a unified React + Node.js stack with an admin approval layer.
 
-<div align="center">
-  <img src="public/solution-overview.png" alt="Solution Overview" width="80%">
-</div>
+### ✅ Implemented Core Features
+- Talent registration with validation & profile photo upload
+- Admin approval workflow (verify / manage submissions)
+- Talent listing with responsive cards & basic filtering
+- Secure API with structured error handling
+- Email notifications (on registration / admin actions)
+- Modern landing page (glass morphism navbar, premium sections, animations)
+- TypeScript across frontend & backend for type safety
 
-### Key Features Implemented
-1. **Talent Registration & Admin Approval** ✅
-   - Secure registration form with validation
-   - Profile photo upload with preview
-   - Admin review system
-   - Email/WhatsApp notifications
+### 🚧 In Progress / Planned
+- Advanced filtering (skills / experience / location)
+- Hire request initiation & tracking UX
+- WhatsApp / multi-channel notifications (Twilio – planned)
+- File storage externalization (S3 – planned; currently local uploads)
+- Real-time updates (WebSocket / SSE) for admin dashboard
 
-2. **Talent Profile Display** ✅
-   - Clean, responsive UI
-   - Advanced search and filters
-   - Skill-based categorization
-
-3. **Client Interaction** ✅
-   - Seamless browsing experience
-   - Secure hire request system
-   - Real-time notifications
-
-4. **Admin Dashboard** ✅
-   - Profile verification system
-   - Request management
-   - Analytics and reporting
-
-5. **Modern UI/UX Design** ✅ **(Recently Enhanced)**
-   - Premium landing page with gradient backgrounds and animations
-   - Interactive admin dashboard with real-time search and filtering
-   - Modern component system with consistent styling
-   - Mobile-responsive design across all devices
-   - Smooth transitions and hover effects
-   - Professional color scheme and typography
-
-## 🎨 Recent UI Improvements
+## 🎨 UI Snapshot
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/8103142b-5687-4013-96af-fed0f38d88dd" alt="Modern Admin Dashboard" width="90%">
-  <p><em>Enhanced Admin Dashboard with modern stats cards, search functionality, and responsive design</em></p>
+   <img src="https://github.com/user-attachments/assets/8103142b-5687-4013-96af-fed0f38d88dd" alt="Admin Dashboard" width="88%">
+   <p><em>Admin area with verification & management panels (visual preview)</em></p>
 </div>
-
-### ✨ What's New:
-- **🚀 Landing Page**: Complete redesign with hero section, testimonials, and interactive elements
-- **📊 Admin Dashboard**: Modern stats cards, advanced filtering, and improved profile management
-- **🎯 Interactive Components**: Hover animations, smooth transitions, and micro-interactions
-- **📱 Mobile First**: Responsive design optimized for all screen sizes
-- **🎨 Design System**: Consistent colors, typography, and spacing throughout
-
-### 🛠️ Technical Enhancements:
-- Custom CSS animations and transitions
-- Gradient backgrounds and modern shadows
-- Improved accessibility with proper focus states
-- Performance-optimized components
-- TypeScript interfaces for better development experience
 
 <!-- ## 🖥️ Demo & Screenshots
 
@@ -107,249 +71,21 @@
 
 ## 📊 Architecture
 
-#### The Talent Platform uses a simple three-tier architecture with React frontend, Node.js backend, and MongoDB database.
+Three-tier architecture (React SPA / Express API / MongoDB) with modular services.
 
 ```mermaid
 graph TD
     A[Client] -->|HTTP| B[React Frontend]
     B -->|API Calls| C[Node.js Backend]
     C -->|Database Queries| D[MongoDB]
-    C -->|File Storage| E[Local Storage]
-    C -->|Email Service| F[Nodemailer]
+   C -->|File Uploads| E[Local Disk (S3 Planned)]
+   C -->|Email Service| F[Nodemailer]
     
     subgraph Frontend
         B -->|React Components| B1[Talent Registration]
         B -->|React Components| B2[Admin Dashboard]
-        B -->|React Components| B3[Client Interface]
-    end
-    
-    subgraph Backend Services
-        C -->|Express Routes| C1[Talent Routes]
-        C -->|Express Routes| C2[Admin Routes]
-        C -->|Middleware| C3[Authentication]
-    end
-```
 
-<br>
-
-## 📝 UI Wireframes (Rough Layout)
-
-<details>
-  <summary>Click to expand!</summary>
-
-> **Note**: These are ASCII art representations of our planned UI layout, not the final design. They serve as a basic visualization of component structure and user flow.
-
-### 🏠 Home Page Layout
-
-```bash
-+-------------Home Page / Landing-----------------+
-|                                                |
-|     🎯 Connect with Top Tech Talent            |
-|     Find the perfect talent for your project   |
-|                                                |
-|     [Browse Talents]  [Register as Talent]     |
-|                                                |
-|  +----------------Features------------------+  |
-|  |                                          |  |
-|  |  🔍 Easy Search    🔒 Verified Profiles |  |
-|  |  📝 Quick Apply    ⭐ Top Talent        |  |
-|  |                                          |  |
-|  +-----------------------------------------+   |
-+------------------------------------------------+
-
-```
-
-### 📋 Registration Form Layout
-
-```bash
-+------------------------------------------+
-|           Talent Platform                 |
-|  [Logo]     Browse  Register   Admin     |
-+------------------------------------------+
-
-+------------------Registration Form----------------+
-|                                                  |
-|                 [Photo Upload]                   |
-|                     ⭕️                          |
-|                                                  |
-|  Full Name: +-------------------------+          |
-|             |                         |          |
-|             +-------------------------+          |
-|                                                  |
-|  Email:    +-------------------------+          |
-|             |                         |          |
-|             +-------------------------+          |
-|                                                  |
-|  Skills:    +-------------+ [Add Skill]         |
-|             |             |                      |
-|             +-------------+                      |
-|                                                  |
-|  [JavaScript] [React] [Node.js] [MongoDB]       |
-|     (clickable tags with 'x' to remove)         |
-|                                                  |
-|  Bio:       +-------------------------+          |
-|             |                         |          |
-|             |                         |          |
-|             +-------------------------+          |
-|                                                  |
-|          [    Submit Registration    ]           |
-|                                                  |
-+--------------------------------------------------+
-```
-
-### 🔍 Talent Directory Layout
-
-```bash
-+-------------------Talent Directory----------------+
-|  Search: +----------------+ [Search]             |
-|                                                  |
-|  +----------------+ +------------------+         |
-|  | Talent Card 1  | | Talent Card 2    |         |
-|  | [Photo]        | | [Photo]          |         |
-|  | Name           | | Name             |         |
-|  | Skills         | | Skills           |         |
-|  | Bio            | | Bio              |         |
-|  +----------------+ +------------------+         |
-|                                                  |
-|  +----------------+ +------------------+         |
-|  | Talent Card 3  | | Talent Card 4    |         |
-|  | [Photo]        | | [Photo]          |         |
-|  | Name           | | Name             |         |
-|  | Skills         | | Skills           |         |
-|  | Bio            | | Bio              |         |
-|  +----------------+ +------------------+         |
-+--------------------------------------------------+
-```
-
-### 👤 Profile Page Layout
-
-```bash
-+--------------Talent Profile Page----------------+
-|                                                |
-|    [Profile Photo]     Status: ✅ Verified     |
-|    John Doe                                    |
-|    Full-Stack Developer                        |
-|                                                |
-|    Skills:                                     |
-|    [React] [Node.js] [MongoDB] [TypeScript]    |
-|                                                |
-|    About Me:                                   |
-|    +--------------------------------------+    |
-|    | Professional developer with 5 years...|   |
-|    +--------------------------------------+    |
-|                                                |
-|    Projects:                                   |
-|    - E-commerce Platform                       |
-|    - Social Media App                          |
-|                                                |
-|    [Contact] [Download CV] [Hire Me]           |
-+------------------------------------------------+
-
-```
-
-
-### 📊 Admin Dashboard Layout
-
-```bash
-+-------------------Admin Dashboard----------------+
-|                                                  |
-|  Pending Approvals (3)                          |
-|  +----------------------------------------+     |
-|  | [Photo] Name: John Doe                 |     |
-|  | Skills: React, Node.js                 |     |
-|  | [Approve] [Reject]                     |     |
-|  +----------------------------------------+     |
-|                                                 |
-|  +----------------------------------------+     |
-|  | [Photo] Name: Jane Smith               |     |
-|  | Skills: Python, AWS                    |     |
-|  | [Approve] [Reject]                     |     |
-|  +----------------------------------------+     |
-+--------------------------------------------------+
-
-```
-```bash
-+---------------Search Results--------------------+
-|  Filters:                                      |
-|  Skills: [×React] [×Node.js]                   |
-|  Experience: [0-2] [2-5] [5+] years            |
-|  Location: [Remote] [On-site]                  |
-|                                                |
-|  Found 15 matches                              |
-|  +----------------+ +------------------+       |
-|  | [Photo]        | | [Photo]          |       |
-|  | Sarah Chen     | | Mike Johnson     |       |
-|  | React Expert   | | Full-Stack Dev   |       |
-|  | ⭐⭐⭐⭐⭐    | | ⭐⭐⭐⭐        |       | 
-|  +----------------+ +------------------+       |
-+------------------------------------------------+
-```
-
-```bash
-+--------------Admin Analytics--------------------+
-|                                                |
-|  📊 Dashboard Overview                         |
-|  +-------------------+ +-------------------+   |
-|  | New Registrations | | Pending Approvals |   |
-|  |        24         | |         7         |   |
-|  +-------------------+ +-------------------+   |
-|                                                |
-|  🔍 Recent Activity                            |
-|  | Time     | Action    | User              |  |
-|  | 10:45 AM | Approved  | John Doe          |  |
-|  | 10:30 AM | Rejected  | Invalid Profile   |  |
-|  | 10:15 AM | New Reg.  | Sarah Chen        |  |
-|                                                |
-|  📈 Weekly Stats                               |
-|  +--------------------------------------+      |
-|  |    ▁▃▅▇█▇▅  Registrations           |       |
-|  |    ▂▄▆▇▆▄▂  Approvals              |        |
-|  +--------------------------------------+      |
-+------------------------------------------------+
-
-```
-
-```bash
-+-------------Notification Panel------------------+
-|  🔔 Notifications                              |
-|                                                |
-|  [Today]                                       |
-|  • Profile approved by admin                   |
-|  • New message from client                     |
-|                                                |
-|  [Yesterday]                                   |
-|  • Profile view by Company XYZ                 |
-|  • Skills endorsed by peer                     |
-|                                                |
-|  [Settings ⚙️]                                 |
-|  □ Email notifications                         |
-|  □ Push notifications                          |
-+------------------------------------------------+
-
-```
-
-```bash
-+-------------Message Center---------------------+
-|  📨 Messages                                  |
-|  +------------------------------------------+ |
-|  | Search messages...        [Filter ▼]     | |
-|  +------------------------------------------+ |
-|                                               |
-|  [Active Chats]                               |
-|  +------------------------------------------+ |
-|  | 🟢 Tech Corp                             | |
-|  | Latest: When can you start...            | |
-|  +------------------------------------------+ |
-|  | 🔴 StartUp Inc                           | |
-|  | Latest: Thanks for your time...          | |
-|  +------------------------------------------+ |
-+----------------------------------------------+
-
-```
 </details>
-
-> These wireframes demonstrate the basic structure and component relationships in our application. The actual implementation uses modern UI components with Tailwind CSS styling.
-
 
 ### 🔄 Component Relationships
 - Home Page → Registration/Directory
@@ -375,8 +111,8 @@ graph TD
 - **Frontend**: React.js with TypeScript
 - **Backend**: Node.js
 - **Database**: MongoDB
-- **File Storage**: AWS S3
-- **Notifications**: Twilio WhatsApp API
+- **File Storage**: Local disk (S3 planned)
+- **Notifications**: Email (WhatsApp/Twilio planned)
 - **Styling**: Tailwind CSS + Custom CSS Animations
 - **Icons**: React Icons
 - **UI Components**: Custom Component System
@@ -456,66 +192,19 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive production deployment instr
 - Database setup and security
 - Monitoring and maintenance
 
-## 🔧 Recent Improvements & Fixes
-
-### ✅ What Was Fixed
-- **Backend Architecture**: Complete restructure with proper TypeScript implementation
-- **Database Integration**: Proper MongoDB connection with Mongoose ODM
-- **API Services**: RESTful API with comprehensive error handling
-- **Authentication**: JWT-based authentication system with role-based access
-- **File Upload**: Multer integration for profile photo uploads  
-- **Email Notifications**: SMTP integration for admin and talent notifications
-- **Error Handling**: Comprehensive error middleware and validation
-- **Security**: Input validation, CORS configuration, and security headers
-- **Dependencies**: All missing packages installed and security vulnerabilities fixed
-- **Build System**: Both frontend and backend now build successfully
-- **Type Safety**: Complete TypeScript implementation with proper types
-- **API Documentation**: Comprehensive API documentation with examples
-- **Deployment**: Docker configurations and production-ready setup
-
-### 🔧 Technical Stack
-- **Frontend**: React 18 + TypeScript + Vite + Tailwind CSS
-- **Backend**: Node.js + Express + TypeScript + MongoDB
-- **Authentication**: JWT tokens with bcryptjs
-- **File Upload**: Multer with local storage
-- **Email**: Nodemailer with SMTP support
-- **Deployment**: Docker + Docker Compose + Nginx
+## 🔧 Implementation Notes
+Key engineering work completed: type-safe Express API, modular routes, email notifications, multer-based uploads, adaptive glass UI, deployment-ready Docker setup, and global font + animation system.
 
    
-### Running the Project
+### Quick Dev Run (Manual)
+Backend: `cd talent-platform/backend && npm run dev`
+Frontend: `cd talent-platform/talent-platform-frontend && npm run dev`
+Frontend dev URL: http://localhost:5173  |  API: http://localhost:8080
 
-<details>
-  <summary>Expand to View</summary>
-
-1. **Start MongoDB:**
-   - Ensure MongoDB service is running
-   - Keep MongoDB Compass open for database monitoring
-
-2. **Start Backend Server:**
-   ```bash
-   cd backend
-   npm run dev
-   ```
-
-3. **Start Frontend Development Server:**
-   ```bash
-   cd talent-platform-frontend
-   npm run dev
-   ```
-
-4. **Access the Application:**
-   - Frontend: `http://localhost:5173`
-   - Backend API: `http://localhost:8080`
-   - Admin Dashboard: `http://localhost:5173/admin`
-
-### Troubleshooting
-- If MongoDB fails to connect, ensure the MongoDB service is running
-- If ports are occupied, update PORT in backend `.env`
-- For frontend build issues, try clearing npm cache:
-  ```bash
-  npm cache clean --force
-
-</details>
+Troubleshooting:
+- Mongo not connecting → verify service / URI
+- Port in use → adjust PORT / VITE_PORT env
+- Stale types → delete `dist` then rebuild
 
 ## 📱 Features & Screenshots
 
@@ -525,46 +214,41 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for comprehensive production deployment instr
 </div>
 
 ### Feature Highlights
-- **Smart Form Validation**: Real-time validation with helpful error messages
-- **Responsive Design**: Works seamlessly on all devices
-- **Secure File Upload**: Support for profile photo upload with preview
-- **Admin Controls**: Comprehensive dashboard for profile management
+- Form validation with feedback
+- Responsive design system
+- Secure profile photo upload
+- Admin verification controls
 
-## 🔒 Security Features
-- Input validation and sanitization
-- Secure file upload handling
-- Protected admin routes
-- Rate limiting for API endpoints
+## 🔒 Security & Hardening
+- Input validation & sanitisation
+- CORS configuration
+- Security headers (helmet)
+- Safe file upload handling (Multer + path constraints)
+- (Planned) Rate limiting & audit logging
 
-## 🎯 Future Scope
-- [ ] AI-powered talent matching
-- [ ] Video interview integration
-- [ ] Blockchain-based skill verification
-- [ ] Mobile application
-- [ ] Advanced analytics dashboard
+## 🎯 Roadmap
+- [ ] Advanced directory filtering (skills / experience)
+- [ ] Hire request lifecycle UI
+- [ ] WhatsApp / multi-channel notifications
+- [ ] S3 object storage integration
+- [ ] AI-assisted talent recommendations
+- [ ] Real-time dashboard updates
+- [ ] Mobile app shell
 
 <hr>
 
-## Team Details
+## 👥 Team
 | Name | Role | GitHub |
 |------|------|--------|
-| Yugandhar Bhardwaj | Project Lead | [@github](https://github.com) |
-| Rudra Pratap Singh | Frontend-Backend Integrator | [@Rudra00codes](https://github.com/Rudra00codes) |
-| Anant Srivastava | Backend and Feature Developer | [@RoboShep](https://github.com)
-| Prince Sharma |  Researcher  | [@github](https://github.com) |
-| Aditya Punj | UI/UX Designer | [@github](https://github.com) |
+| Yugandhar Bhardwaj | Project Lead | — |
+| Rudra Pratap Singh | Frontend & Integration | [@Rudra00codes](https://github.com/Rudra00codes) |
+| Anant Srivastava | Backend Developer | [@RoboShep](https://github.com/RoboShep) |
+| Prince Sharma | Research | — |
+| Aditya Punj | UI/UX Designer | — |
 
 <br>
 
-# Create a zip file
-
-```bash
-zip -r talent-platform.zip talent-platform/ \
-   -x "talent-platform/node_modules/*" \
-   -x "talent-platform/*/node_modules/*" \
-   -x "talent-platform/.git/*" \
-   -x "talent-platform/*/.env"
-```
+---
 ## 🙏 Acknowledgments
 - JPD Hub for the opportunity
 - Advitiya IIT Ropar for hosting
