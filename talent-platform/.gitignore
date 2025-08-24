@@ -19,6 +19,9 @@ uploads/
 
 # production
 /build
+backend/dist/
+talent-platform-frontend/dist/
+**/dist/
 
 # misc
 .DS_Store
