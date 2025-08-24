@@ -50,13 +50,6 @@ The platform streamlines talent onboarding, verification, discovery, and client 
 - File storage externalization (S3 – planned; currently local uploads)
 - Real-time updates (WebSocket / SSE) for admin dashboard
 
-## 🎨 UI Snapshot
-
-<div align="center">
-   <img src="https://github.com/user-attachments/assets/8103142b-5687-4013-96af-fed0f38d88dd" alt="Admin Dashboard" width="88%">
-   <p><em>Admin area with verification & management panels (visual preview)</em></p>
-</div>
-
 <!-- ## 🖥️ Demo & Screenshots
 
 <div align="center">
@@ -75,17 +68,27 @@ Three-tier architecture (React SPA / Express API / MongoDB) with modular service
 
 ```mermaid
 graph TD
-    A[Client] -->|HTTP| B[React Frontend]
-    B -->|API Calls| C[Node.js Backend]
-    C -->|Database Queries| D[MongoDB]
-   C -->|File Uploads| E[Local Disk (S3 Planned)]
-   C -->|Email Service| F[Nodemailer]
-    
-    subgraph Frontend
-        B -->|React Components| B1[Talent Registration]
-        B -->|React Components| B2[Admin Dashboard]
+   A[Client Browser] -->|HTTP| B[React Frontend]
+   B -->|REST Calls| C[Node.js Backend]
+   C -->|DB Queries| D[(MongoDB)]
+   C -->|File Uploads| E[(Local Disk)]
+   C -->|Email| F[(Nodemailer)]
+  
+   subgraph Frontend
+      B --> B1[Talent Registration UI]
+      B --> B2[Admin Dashboard UI]
+      B --> B3[Directory & Profile Views]
+   end
+   subgraph Backend
+      C --> C1[Talent Routes]
+      C --> C2[Admin Routes]
+      C --> C3[Auth Middleware]
+   end
+   C -->|Planned| G[(S3 Storage)]
+   C -->|Planned| H[(WhatsApp / Twilio)]
+```
 
-</details>
+> Planned nodes (S3 Storage, WhatsApp / Twilio) are not yet implemented.
 
 ### 🔄 Component Relationships
 - Home Page → Registration/Directory
