@@ -212,8 +212,8 @@ Troubleshooting:
 ## 📱 Features & Screenshots
 
 <div align="center">
-  <img src="public/screenshots/registration.png" alt="Registration Form" width="45%">
-  <img src="public/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="45%">
+  <img src="./talent-platform/docs/screenshots/landing-hero.png" alt="Landing Hero" width="45%">
+  <img src="./talent-platform/docs/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="45%">
 </div>
 
 ### Feature Highlights
