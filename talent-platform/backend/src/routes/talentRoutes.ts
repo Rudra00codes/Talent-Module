@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import express, { Router } from 'express';
 import talentController from '../controllers/talentController';
 import { upload } from '../services/fileUploadService';
 

@@ -5,9 +5,11 @@ import helmet from 'helmet';
 import compression from 'compression';
 import path from 'path';
 import fs from 'fs';
+import mongoose from 'mongoose';
 import talentRoutes from './routes/talentRoutes';
 import adminRoutes from './routes/adminRoutes';
 import authRoutes from './routes/authRoutes';
+import connectDB from './config/database';
 import { errorHandler, notFound } from './middleware/errorHandler';
 
 dotenv.config();
@@ -35,10 +37,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/talent', talentRoutes);
 app.use('/api/admin', adminRoutes);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/talent-platform')
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// (Initial direct mongoose.connect call removed; using central connectDB below)
 
 // Root route
 app.get('/', (req, res) => {
@@ -53,9 +52,9 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 8080;
 connectDB()
   .then(() => {
-  // Ensure upload directories exist
-  const uploadDir = path.resolve(__dirname, '../uploads/profile-photos');
-  fs.mkdirSync(uploadDir, { recursive: true });
+    // Ensure upload directories exist
+    const uploadDir = path.resolve(__dirname, '../uploads/profile-photos');
+    fs.mkdirSync(uploadDir, { recursive: true });
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
