@@ -1,0 +1,7 @@
+# Files to exclude from Vercel deployment
+docs/
+**/*.md
+!README.md
+src/index.html
+src/assets/fonts/Space_Grotesk/README.txt
+src/assets/fonts/Space_Grotesk/OFL.txt
