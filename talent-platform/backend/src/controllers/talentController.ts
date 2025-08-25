@@ -51,8 +51,8 @@ export class TalentController {
 
       await talent.save();
 
-      // Send notification to admin (placeholder)
-      console.log(`New talent registration: ${name} (${email})`);
+      // Send notification to admin (implementation needed)
+      // TODO: Implement admin notification system
 
       res.status(201).json({
         message: 'Registration successful! Your profile is pending admin approval.',

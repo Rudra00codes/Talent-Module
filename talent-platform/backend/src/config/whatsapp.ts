@@ -7,8 +7,8 @@ export const sendWhatsAppMessage = async (
   message: string
 ): Promise<boolean> => {
   try {
-    console.log(`WhatsApp message would be sent to ${phoneNumber}: ${message}`);
     // TODO: Implement actual Twilio WhatsApp API integration
+    // Message would be sent to: ${phoneNumber}
     return true;
   } catch (error) {
     console.error('Failed to send WhatsApp message:', error);

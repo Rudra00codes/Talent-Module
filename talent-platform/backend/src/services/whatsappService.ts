@@ -53,7 +53,7 @@ View Request: ${process.env.FRONTEND_URL}/admin/requests/${data._id}
         to: `whatsapp:${adminNumber}`
       });
 
-      console.log('WhatsApp notification sent successfully');
+      // WhatsApp notification sent successfully
     } catch (error) {
       console.error('Error sending WhatsApp notification:', error);
       throw new Error('Failed to send WhatsApp notification');

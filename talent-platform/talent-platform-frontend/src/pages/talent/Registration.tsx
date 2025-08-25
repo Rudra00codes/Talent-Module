@@ -100,7 +100,7 @@ const Registration: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/talents/register', {
+      await axios.post('http://localhost:8080/api/talents/register', {
         name: formData.firstName + ' ' + formData.lastName,
         email: formData.email,
         skills: formData.skills,
@@ -113,7 +113,7 @@ const Registration: React.FC = () => {
         availability: formData.availability,
         expectedRate: formData.expectedRate
       });
-      console.log('Registration successful:', response.data);
+      // Registration successful - redirect will be handled by server response
     } catch (error) {
       console.error('Error registering talent:', error);
     }

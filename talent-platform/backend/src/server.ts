@@ -56,7 +56,9 @@ connectDB()
     const uploadDir = path.resolve(__dirname, '../uploads/profile-photos');
     fs.mkdirSync(uploadDir, { recursive: true });
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(`Server running on port ${PORT}`);
+      }
     });
   })
   .catch((err) => {
